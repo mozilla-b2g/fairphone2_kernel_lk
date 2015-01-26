@@ -46,6 +46,7 @@
 #include "include/panel_generic_720p_cmd.h"
 #include "include/panel_jdi_qhd_dualdsi_video.h"
 #include "include/panel_jdi_qhd_dualdsi_cmd.h"
+#include "include/panel_otm1902b_1080p_cmd.h"
 
 #define DISPLAY_MAX_PANEL_DETECTION 3
 
@@ -59,6 +60,7 @@ SHARP_QHD_VIDEO_PANEL,
 GENERIC_720P_CMD_PANEL,
 JDI_QHD_DUALDSI_VIDEO_PANEL,
 JDI_QHD_DUALDSI_CMD_PANEL,
+OTM1902B_1080P_CMD_PANEL,
 UNKNOWN_PANEL
 };
 
@@ -227,6 +229,26 @@ static void init_panel_data(struct panel_struct *panelstruct,
 		memcpy(phy_db->timing,
 			jdi_qhd_dualdsi_cmd_timings, TIMING_SIZE);
 		break;
+	case OTM1902B_1080P_CMD_PANEL:
+		panelstruct->paneldata    = &otm1902b_1080p_cmd_panel_data;
+		panelstruct->panelres     = &otm1902b_1080p_cmd_panel_res;
+		panelstruct->color        = &otm1902b_1080p_cmd_color;
+		panelstruct->videopanel   = &otm1902b_1080p_cmd_video_panel;
+		panelstruct->commandpanel = &otm1902b_1080p_cmd_command_panel;
+		panelstruct->state        = &otm1902b_1080p_cmd_state;
+		panelstruct->laneconfig   = &otm1902b_1080p_cmd_lane_config;
+		panelstruct->paneltiminginfo
+			= &otm1902b_1080p_cmd_timing_info;
+		panelstruct->panelresetseq
+					 = &otm1902b_1080p_cmd_panel_reset_seq;
+		panelstruct->backlightinfo = &otm1902b_1080p_cmd_backlight;
+		pinfo->mipi.panel_cmds
+			= otm1902b_1080p_cmd_on_command;
+		pinfo->mipi.num_of_panel_cmds
+			= JDI_QHD_DUALDSI_CMD_ON_COMMAND;
+		memcpy(phy_db->timing,
+			otm1902b_1080p_cmd_timings, TIMING_SIZE);
+		break;
 	case UNKNOWN_PANEL:
 		memset(panelstruct, 0, sizeof(struct panel_struct));
 		memset(pinfo->mipi.panel_cmds, 0, sizeof(struct mipi_dsi_cmd));
@@ -300,7 +322,7 @@ bool oem_panel_select(const char *panel_name, struct panel_struct *panelstruct,
 					, hw_id);
 		return false;
 	}
-
+	panel_id = OTM1902B_1080P_CMD_PANEL;
 panel_init:
 	init_panel_data(panelstruct, pinfo, phy_db);
 
