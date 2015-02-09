@@ -54,7 +54,7 @@ static struct panel_config otm1902b_1080p_cmd_panel_data = {
 /* Panel resolution                                                          */
 /*---------------------------------------------------------------------------*/
 static struct panel_resolution otm1902b_1080p_cmd_panel_res = {
-  1080, 1920, 140, 164, 8, 0, 6, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0
+  1080, 1920, 40, 64, 8, 0, 6, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0
 };
 
 /*---------------------------------------------------------------------------*/
@@ -149,34 +149,42 @@ static char otm1902b_1080p_cmd_on_cmd15[] = {
 
 static char otm1902b_1080p_cmd_on_cmd16[] = {
 0x02, 0x00, 0x29, 0xC0,
-0x11, 0x00, 0xFF, 0xFF,  };
+0x53, 0x2C, 0xFF, 0xFF,  };
 
 
 static char otm1902b_1080p_cmd_on_cmd17[] = {
 0x02, 0x00, 0x29, 0xC0,
-0x29, 0x00, 0xFF, 0xFF,  };
+0x51, 0xFF, 0xFF, 0xFF,  };
+
+static char otm1902b_1080p_cmd_on_cmd18[] = {
+0x11, 0x00, 0x05, 0x80,  };
+
+static char otm1902b_1080p_cmd_on_cmd19[] = {
+0x29, 0x00, 0x05, 0x80,   };
 
 static struct mipi_dsi_cmd otm1902b_1080p_cmd_on_command[] = {
-{ 0x8 , otm1902b_1080p_cmd_on_cmd0 , 0x00},
-{ 0x8 , otm1902b_1080p_cmd_on_cmd1 , 0x00},
-{ 0x8 , otm1902b_1080p_cmd_on_cmd2 , 0x00},
-{ 0x8 , otm1902b_1080p_cmd_on_cmd3 , 0x00},
-{ 0x8 , otm1902b_1080p_cmd_on_cmd4 , 0x00},
-{ 0x8 , otm1902b_1080p_cmd_on_cmd5 , 0x00},
-{ 0x8 , otm1902b_1080p_cmd_on_cmd6 , 0x00},
-{ 0x8 , otm1902b_1080p_cmd_on_cmd7 , 0x00},
-{ 0x8 , otm1902b_1080p_cmd_on_cmd8 , 0x00},
-{ 0x8 , otm1902b_1080p_cmd_on_cmd9 , 0x00},
-{ 0x8 , otm1902b_1080p_cmd_on_cmd10 , 0x00},
-{ 0x8 , otm1902b_1080p_cmd_on_cmd11 , 0x00},
-{ 0x8 , otm1902b_1080p_cmd_on_cmd12 , 0x00},
-{ 0x8 , otm1902b_1080p_cmd_on_cmd13 , 0x00},
-{ 0x8 , otm1902b_1080p_cmd_on_cmd14 , 0x00},
-{ 0x8 , otm1902b_1080p_cmd_on_cmd15 , 0x00},
-{ 0x8 , otm1902b_1080p_cmd_on_cmd16 , 0x32},
-{ 0x8 , otm1902b_1080p_cmd_on_cmd17 , 0x60},
+{ 0x8 , otm1902b_1080p_cmd_on_cmd0 ,0x01},
+{ 0x8 , otm1902b_1080p_cmd_on_cmd1 ,0x01},
+{ 0x8 , otm1902b_1080p_cmd_on_cmd2 ,0x01},
+{ 0x8 , otm1902b_1080p_cmd_on_cmd3 ,0x01},
+{ 0x8 , otm1902b_1080p_cmd_on_cmd4 ,0x01},
+{ 0x8 , otm1902b_1080p_cmd_on_cmd5 ,0x01},
+{ 0x8 , otm1902b_1080p_cmd_on_cmd6 ,0x01},
+{ 0x8 , otm1902b_1080p_cmd_on_cmd7 ,0x01},
+{ 0x8 , otm1902b_1080p_cmd_on_cmd8 ,0x01},
+{ 0x8 , otm1902b_1080p_cmd_on_cmd9 ,0x01},
+{ 0x8 , otm1902b_1080p_cmd_on_cmd10 ,0x01},
+{ 0x8 , otm1902b_1080p_cmd_on_cmd11 ,0x01},
+{ 0x8 , otm1902b_1080p_cmd_on_cmd12 ,0x01},
+{ 0x8 , otm1902b_1080p_cmd_on_cmd13 ,0x01},
+{ 0x8 , otm1902b_1080p_cmd_on_cmd14 ,0x01},
+{ 0x8 , otm1902b_1080p_cmd_on_cmd15 ,0x01},
+{ 0x8 , otm1902b_1080p_cmd_on_cmd16 ,0x01},
+{ 0x8 , otm1902b_1080p_cmd_on_cmd17 ,0x01},
+{ 0x4 , otm1902b_1080p_cmd_on_cmd18 , 0x32},
+{ 0x4 , otm1902b_1080p_cmd_on_cmd19 , 0x60},
 };
-#define OTM1902B_1080P_CMD_ON_COMMAND 18
+#define OTM1902B_1080P_CMD_ON_COMMAND 20
 
 static char otm1902b_1080p_cmdoff_cmd0[] = {
 0x28, 0x00, 0x05, 0x80 };

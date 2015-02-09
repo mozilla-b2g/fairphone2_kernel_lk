@@ -75,6 +75,7 @@ static struct panel_list supp_panels[] = {
 	{"generic_720p_cmd", GENERIC_720P_CMD_PANEL},
 	{"jdi_qhd_dualdsi_video", JDI_QHD_DUALDSI_VIDEO_PANEL},
 	{"jdi_qhd_dualdsi_cmd", JDI_QHD_DUALDSI_CMD_PANEL},
+	{"otm1902b_1080p_cmd",OTM1902B_1080P_CMD_PANEL},
 };
 
 static uint32_t panel_id;
@@ -245,7 +246,7 @@ static void init_panel_data(struct panel_struct *panelstruct,
 		pinfo->mipi.panel_cmds
 			= otm1902b_1080p_cmd_on_command;
 		pinfo->mipi.num_of_panel_cmds
-			= JDI_QHD_DUALDSI_CMD_ON_COMMAND;
+			= OTM1902B_1080P_CMD_ON_COMMAND;
 		memcpy(phy_db->timing,
 			otm1902b_1080p_cmd_timings, TIMING_SIZE);
 		break;
@@ -299,7 +300,7 @@ bool oem_panel_select(const char *panel_name, struct panel_struct *panelstruct,
 	case HW_PLATFORM_SURF:
 		switch (auto_pan_loop) {
 		case 0:
-			panel_id = JDI_1080P_VIDEO_PANEL;
+			panel_id = OTM1902B_1080P_CMD_PANEL;
 			break;
 		case 1:
 			panel_id = TOSHIBA_720P_VIDEO_PANEL;
@@ -322,7 +323,7 @@ bool oem_panel_select(const char *panel_name, struct panel_struct *panelstruct,
 					, hw_id);
 		return false;
 	}
-	panel_id = OTM1902B_1080P_CMD_PANEL;
+
 panel_init:
 	init_panel_data(panelstruct, pinfo, phy_db);
 

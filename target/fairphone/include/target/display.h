@@ -38,11 +38,11 @@
 /* GPIO configuration                                                        */
 /*---------------------------------------------------------------------------*/
 static struct gpio_pin reset_gpio = {
-  "pm8941_gpios", 19, 2, 1, 0, 1
+  "pm8941_gpios", 19, 3, 1, 0, 1
 };
 
 static struct gpio_pin enable_gpio = {
-  "msmgpio", 58, 3, 1, 0, 1
+  "msmgpio", 25, 3, 1, 0, 1
 };
 
 static struct gpio_pin pwm_gpio = {
