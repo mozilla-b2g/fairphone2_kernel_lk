@@ -353,6 +353,31 @@ void target_mmc_caps(struct mmc_host *host)
 }
 #endif
 
+#define DRV2603_VIBRATOR_EN 86
+#define DRV2603_VIBRATOR_PWM 85
+#define FUNC_GPIO 0
+
+/* Vibrator enable */
+void vibrator_enable()
+{
+        uint32_t pm8x41_ldo_base = 0x13F00;
+        struct pm8x41_ldo ldo18 = LDO(pm8x41_ldo_base + 0x100 * 18, 0);
+        /* Turn on LDO18 for Vibrator */
+        pm8x41_ldo_set_voltage(&ldo18, 2850000);
+        pm8x41_ldo_control(&ldo18, 1);
+        dprintf(INFO,"%s \n",__func__);
+        udelay(200);
+        gpio_tlmm_config(DRV2603_VIBRATOR_PWM, FUNC_GPIO, GPIO_OUTPUT, GPIO_PULL_DOWN, GPIO_2MA, GPIO_DISABLE);
+        gpio_set(85, 2);
+        udelay(200);
+        gpio_tlmm_config(DRV2603_VIBRATOR_EN, FUNC_GPIO, GPIO_OUTPUT, GPIO_PULL_DOWN, GPIO_2MA, GPIO_DISABLE);
+        gpio_set(86, 2);
+        mdelay(200);
+        gpio_tlmm_config(DRV2603_VIBRATOR_EN, FUNC_GPIO, GPIO_OUTPUT, GPIO_PULL_UP, GPIO_2MA, GPIO_ENABLE);
+        gpio_tlmm_config(DRV2603_VIBRATOR_PWM, FUNC_GPIO, GPIO_OUTPUT, GPIO_PULL_UP, GPIO_2MA, GPIO_ENABLE);
+        pm8x41_ldo_control(&ldo18, 0);
+}
+/* Vibrator end */
 
 void target_init(void)
 {
@@ -367,6 +392,11 @@ void target_init(void)
 
 	if (target_use_signed_kernel())
 		target_crypto_init_params();
+
+	/* Vibrator start */
+        dprintf(INFO, "calling vibrator enable\n");
+        vibrator_enable();
+	/* Vibrator end */
 
 	/*
 	 * Set drive strength & pull ctrl for
