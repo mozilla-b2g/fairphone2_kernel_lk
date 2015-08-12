@@ -180,11 +180,10 @@ static struct mipi_dsi_cmd otm1902b_1080p_cmd_on_command[] = {
 { 0x8 , otm1902b_1080p_cmd_on_cmd14 ,0x01},
 { 0x8 , otm1902b_1080p_cmd_on_cmd15 ,0x01},
 { 0x8 , otm1902b_1080p_cmd_on_cmd16 ,0x01},
-{ 0x8 , otm1902b_1080p_cmd_on_cmd17 ,0x01},
 { 0x4 , otm1902b_1080p_cmd_on_cmd18 , 0x32},
 { 0x4 , otm1902b_1080p_cmd_on_cmd19 , 0x60},
 };
-#define OTM1902B_1080P_CMD_ON_COMMAND 20
+#define OTM1902B_1080P_CMD_ON_COMMAND 19
 
 static char otm1902b_1080p_cmdoff_cmd0[] = {
 0x28, 0x00, 0x05, 0x80 };

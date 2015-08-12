@@ -245,7 +245,7 @@ int target_panel_reset(uint8_t enable, struct panel_reset_sequence *resetseq,
 	struct pm8x41_gpio resetgpio_param = {
 		.direction = PM_GPIO_DIR_OUT,
 		.output_buffer = PM_GPIO_OUT_CMOS,
-		.out_strength = PM_GPIO_OUT_DRIVE_MED,
+		.out_strength = PM_GPIO_OUT_DRIVE_LOW,
 	};
 
 	if (platform_id == MSM8974AC)
@@ -258,11 +258,7 @@ int target_panel_reset(uint8_t enable, struct panel_reset_sequence *resetseq,
 
 	pm8x41_gpio_config(rst_gpio, &resetgpio_param);
 	if (enable) {
-		gpio_tlmm_config(enable_gpio.pin_id, 0,
-			enable_gpio.pin_direction, enable_gpio.pin_pull,
-			enable_gpio.pin_strength, enable_gpio.pin_state);
 
-		gpio_set(enable_gpio.pin_id, resetseq->pin_direction);
 		pm8x41_gpio_set(rst_gpio, resetseq->pin_state[0]);
 		mdelay(resetseq->sleep[0]);
 		pm8x41_gpio_set(rst_gpio, resetseq->pin_state[1]);
@@ -301,7 +297,11 @@ int target_ldo_ctrl(uint8_t enable)
 		}
 		ldocounter++;
 	}
+	gpio_tlmm_config(enable_gpio.pin_id, 0,
+	enable_gpio.pin_direction, enable_gpio.pin_pull,
+	enable_gpio.pin_strength, enable_gpio.pin_state);
 
+	gpio_set(enable_gpio.pin_id,2);
 	return NO_ERROR;
 }
 
