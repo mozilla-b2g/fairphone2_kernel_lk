@@ -246,6 +246,9 @@ int target_panel_reset(uint8_t enable, struct panel_reset_sequence *resetseq,
 		.direction = PM_GPIO_DIR_OUT,
 		.output_buffer = PM_GPIO_OUT_CMOS,
 		.out_strength = PM_GPIO_OUT_DRIVE_LOW,
+        .pull = 5,
+        .vin_sel = 2,
+        .function = 0,
 	};
 
 	if (platform_id == MSM8974AC)
