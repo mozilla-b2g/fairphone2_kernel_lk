@@ -2,7 +2,7 @@
 #
 LOCAL_DIR := $(GET_LOCAL_DIR)
 
-TARGET := fairphone
+TARGET := FP2
 
 MODULES += app/aboot
 
